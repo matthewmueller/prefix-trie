@@ -13,6 +13,14 @@
       return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
     }
 
+    var size = function(obj) {
+      var size = 0, key;
+      for (key in obj) {
+          if (obj.hasOwnProperty(key)) size++;
+      }
+      return size;
+    }
+
     trie.traverse = function(word, on_match) {
       var T = data,
           w = word,
@@ -109,44 +117,46 @@
     trie.find = function(query) {
       var matched;
       var upto = '';
+      
+      if(!query) {
+        return false;
+      }
+      
       trie.traverse(query, function(character, match) {
         upto += character;
         matched = match; 
       });
 
       var remaining = query.substr(upto.length, query.length);
-      // console.log("Remaining: " + remaining);
-      if(!upto) {
+
+      var entered = false;
+      
+      if (!upto) {
         for(var word in trie.data) {
           wordSlice = word.substr(0, query.length);
           if(remaining === wordSlice) {
             return word;
           }
         }
-        return "";
       }
-
-
-      var entered = false;
+      
       for(match in matched) {
         entered = true;
-        if (remaining == "") {
-          return upto + match;
-        }
-        // console.log("Remaining:", remaining);
-        // console.log('up to :', upto);
+        
         var matchSlice = match.substr(0, remaining.length);
-        // console.log("Match Slice: ", matchSlice);
-
         if (remaining === matchSlice) {
-          return upto + match;
+          if(size(match) === 1) {
+            return false;
+          } else {
+            return upto + match;
+          }
         }
       }
 
       if(!entered && !remaining) {
         return query;
       } else {
-        return '';
+        return false;
       }
     }
 
@@ -160,8 +170,10 @@
     return trie;
   }
   
-  if(module) {
+  if (typeof module !== 'undefined' && module.exports) {
     module.exports = trie;
+  } else {
+    context.trie = trie;
   }
   
 })(this);

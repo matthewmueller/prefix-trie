@@ -10,11 +10,30 @@ findTest = (trie, query, expected) ->
   assert.equal result, expected
 
 tests = 
+  "" : false
   "A" : "Afghanistan"
   "Al" : "Albania"
   "B" : false
-
-
+  "C" : false
+  "Cu" : "Cuba"
+  "D" : "Denmark"
+  "Do" : "Dominica"
+  "Dominican" : "Dominican Republic"
+  "Eg" : "Egypt"
+  "Eq" : "Equatorial Guinea"
+  "F" : false
+  "Fi" : "Fiji"
+  "H" : "Haiti"
+  "Ha" : "Haiti"
+  "Hai" : "Haiti"
+  "Hait" : "Haiti"
+  "Haiti" : "Haiti"
+  "K" : "Kazakhstan"
+  "P" : false
+  "Pa" : "Pakistan"
+  "Pap" : "Papua New Guinea"
+  "Pu" : "Puerto Rico"
+  "Y" : "Yemen"
 
 test = 
   "when searching the trie..." :
@@ -31,8 +50,6 @@ for query, expected of tests
       findTest trie, query, expected 
 
 _.extend test["when searching the trie..."], expectedFuncs
-
-console.log test
 
 # Add the test to the batch
 suite.addBatch test
