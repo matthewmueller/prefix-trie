@@ -1,0 +1,333 @@
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>trie</title>
+    <script src="trie.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript">
+    words = ["Friends", "Fondu", "Family", "Javascript", "French", "Soccer", "Football"];
+    
+    var countries = [
+        "Afghanistan",
+      	"Albania",
+      	"Algeria",
+      	"American Samoa",
+      	"Andorra",
+      	"Angola",
+      	"Anguilla",
+      	"Antarctica",
+      	"Antigua and Barbuda",
+      	"Argentina",
+      	"Armenia",
+      	"Aruba",
+      	"Australia",
+      	"Austria",
+      	"Azerbaijan",
+      	"Bahamas",
+      	"Bahrain",
+      	"Bangladesh",
+      	"Barbados",
+      	"Belarus",
+      	"Belgium",
+      	"Belize",
+      	"Benin",
+      	"Bermuda",
+      	"Bhutan",
+      	"Bolivia",
+      	"Bosnia and Herzegovina",
+      	"Botswana",
+      	"Bouvet Island",
+      	"Brazil",
+      	"British Indian Ocean Territory",
+      	"Brunei Darussalam",
+      	"Bulgaria",
+      	"Burkina Faso",
+      	"Burundi",
+      	"Cambodia",
+      	"Cameroon",
+      	"Canada",
+      	"Cape Verde",
+      	"Cayman Islands",
+      	"Central African Republic",
+      	"Chad",
+      	"Chile",
+      	"China",
+      	"Christmas Island",
+      	"Cocos (Keeling) Islands",
+      	"Colombia",
+      	"Comoros",
+      	"Congo",
+      	"Congo, the Democratic Republic of the",
+      	"Cook Islands",
+      	"Costa Rica",
+      	"Cote D'Ivoire",
+      	"Croatia",
+      	"Cuba",
+      	"Cyprus",
+      	"Czech Republic",
+      	"Denmark",
+      	"Djibouti",
+      	"Dominica",
+      	"Dominican Republic",
+      	"Ecuador",
+      	"Egypt",
+      	"El Salvador",
+      	"Equatorial Guinea",
+      	"Eritrea",
+      	"Estonia",
+      	"Ethiopia",
+      	"Falkland Islands (Malvinas)",
+      	"Faroe Islands",
+      	"Fiji",
+      	"Finland",
+      	"France",
+      	"French Guiana",
+      	"French Polynesia",
+      	"French Southern Territories",
+      	"Gabon",
+      	"Gambia",
+      	"Georgia",
+      	"Germany",
+      	"Ghana",
+      	"Gibraltar",
+      	"Greece",
+      	"Greenland",
+      	"Grenada",
+      	"Guadeloupe",
+      	"Guam",
+      	"Guatemala",
+      	"Guinea",
+      	"Guinea-Bissau",
+      	"Guyana",
+      	"Haiti",
+      	"Heard Island and Mcdonald Islands",
+      	"Holy See (Vatican City State)",
+      	"Honduras",
+      	"Hong Kong",
+      	"Hungary",
+      	"Iceland",
+      	"India",
+      	"Indonesia",
+      	"Iran, Islamic Republic of",
+      	"Iraq",
+      	"Ireland",
+      	"Israel",
+      	"Italy",
+      	"Jamaica",
+      	"Japan",
+      	"Jordan",
+      	"Kazakhstan",
+      	"Kenya",
+      	"Kiribati",
+      	"Korea, Democratic People's Republic of",
+      	"Korea, Republic of",
+      	"Kuwait",
+      	"Kyrgyzstan",
+      	"Lao People's Democratic Republic",
+      	"Latvia",
+      	"Lebanon",
+      	"Lesotho",
+      	"Liberia",
+      	"Libyan Arab Jamahiriya",
+      	"Liechtenstein",
+      	"Lithuania",
+      	"Luxembourg",
+      	"Macao",
+      	"Macedonia, the Former Yugoslav Republic of",
+      	"Madagascar",
+      	"Malawi",
+      	"Malaysia",
+      	"Maldives",
+      	"Mali",
+      	"Malta",
+      	"Marshall Islands",
+      	"Martinique",
+      	"Mauritania",
+      	"Mauritius",
+      	"Mayotte",
+      	"Mexico",
+      	"Micronesia, Federated States of",
+      	"Moldova, Republic of",
+      	"Monaco",
+      	"Mongolia",
+      	"Montserrat",
+      	"Morocco",
+      	"Mozambique",
+      	"Myanmar",
+      	"Namibia",
+      	"Nauru",
+      	"Nepal",
+      	"Netherlands",
+      	"Netherlands Antilles",
+      	"New Caledonia",
+      	"New Zealand",
+      	"Nicaragua",
+      	"Niger",
+      	"Nigeria",
+      	"Niue",
+      	"Norfolk Island",
+      	"Northern Mariana Islands",
+      	"Norway",
+      	"Oman",
+      	"Pakistan",
+      	"Palau",
+      	"Palestinian Territory, Occupied",
+      	"Panama",
+      	"Papua New Guinea",
+      	"Paraguay",
+      	"Peru",
+      	"Philippines",
+      	"Pitcairn",
+      	"Poland",
+      	"Portugal",
+      	"Puerto Rico",
+      	"Qatar",
+      	"Reunion",
+      	"Romania",
+      	"Russian Federation",
+      	"Rwanda",
+      	"Saint Helena",
+      	"Saint Kitts and Nevis",
+      	"Saint Lucia",
+      	"Saint Pierre and Miquelon",
+      	"Saint Vincent and the Grenadines",
+      	"Samoa",
+      	"San Marino",
+      	"Sao Tome and Principe",
+      	"Saudi Arabia",
+      	"Senegal",
+      	"Serbia and Montenegro",
+      	"Seychelles",
+      	"Sierra Leone",
+      	"Singapore",
+      	"Slovakia",
+      	"Slovenia",
+      	"Solomon Islands",
+      	"Somalia",
+      	"South Africa",
+      	"South Georgia and the South Sandwich Islands",
+      	"Spain",
+      	"Sri Lanka",
+      	"Sudan",
+      	"Suriname",
+      	"Svalbard and Jan Mayen",
+      	"Swaziland",
+      	"Sweden",
+      	"Switzerland",
+      	"Syrian Arab Republic",
+      	"Taiwan, Province of China",
+      	"Tajikistan",
+      	"Tanzania, United Republic of",
+      	"Thailand",
+      	"Timor-Leste",
+      	"Togo",
+      	"Tokelau",
+      	"Tonga",
+      	"Trinidad and Tobago",
+      	"Tunisia",
+      	"Turkey",
+      	"Turkmenistan",
+      	"Turks and Caicos Islands",
+      	"Tuvalu",
+      	"Uganda",
+      	"Ukraine",
+      	"United Arab Emirates",
+      	"United Kingdom",
+      	"United States",
+      	"United States Minor Outlying Islands",
+      	"Uruguay",
+      	"Uzbekistan",
+      	"Vanuatu",
+      	"Venezuela",
+      	"Viet Nam",
+      	"Virgin Islands, British",
+      	"Virgin Islands, U.s.",
+      	"Wallis and Futuna",
+      	"Western Sahara",
+      	"Yemen",
+      	"Zambia",
+      	"Zimbabwe"
+      
+    ];
+    
+    var trie = trie(countries);
+    console.log(words);
+    console.log(trie.data);
+    
+    console.log("–––––––––––––––––––––");
+    
+    var s = trie.find("S");
+    console.log("Result 'S': " + s);
+    
+    var j = trie.find("J");
+    console.log("Result 'J': " + j);
+    
+    var ja = trie.find("Ja");
+    console.log("Result 'Ja': " + ja);
+    
+    var f = trie.find("F");
+    console.log("Result 'F': " + f);
+    
+    var fo = trie.find("Fo");
+    console.log("Result 'Fo': " + fo);
+    
+    var fa = trie.find("Fa");
+    console.log("Result 'Fa': " + fa);
+    
+    var foo = trie.find("Foo");
+    console.log("Result 'Foo': " + foo);
+    
+    var foot = trie.find("Foot");
+    console.log("Result 'Foot': " + foot);
+    
+    var fon = trie.find("Fon");
+    console.log("Result 'Fon': " + fon);
+    
+    var fond = trie.find("Fond");
+    console.log("Result 'Fond': " + fond);
+    
+    var fondu = trie.find("Fondu");
+    console.log("Result 'Fondu': " + fondu);
+    
+    var fr = trie.find("Fr");
+    console.log("Result 'Fr': " + fr);
+    
+    var fri = trie.find("Fri");
+    console.log("Result 'Fri': " + fri);
+    
+    var fre = trie.find("Fre");
+    console.log("Result 'Fre': " + fre);
+    
+    var fren = trie.find("Fren");
+    console.log("Result 'Fren': " + fren);
+        
+    var football = trie.find("Football");
+    console.log("Result 'Football': " + football);
+    
+    console.log("–––––––––––––––––––––");
+    
+    var b = trie.find("B");
+    console.log("Result 'B': " + b);
+    
+    var fob = trie.find('Fob');
+    console.log("Result 'Fob': " + fob);
+    
+    var far = trie.find("Far");
+    console.log("Result 'Far': " + far);
+    
+    var fars = trie.find("Fars");
+    console.log("Result 'Fars': " + fars);
+    
+    var footballz = trie.find("Footballz");
+    console.log("Result 'Footballz': " + footballz);
+    
+    var soccerzz = trie.find("Soccerzz");
+    console.log("Result 'Soccerzz': " + soccerzz);
+    
+    </script>
+    
+  </head>
+  <body>
+    
+  </body>
+</html>
