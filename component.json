@@ -1,0 +1,14 @@
+{
+  "name": "prefix-trie",
+  "repo": "MatthewMueller/prefix-trie",
+  "description": "prefix-trie data structure",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "main": "trie.js",
+  "scripts": [
+    "trie.js"
+  ]
+}
